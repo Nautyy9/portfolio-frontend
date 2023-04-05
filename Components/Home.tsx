@@ -2,7 +2,7 @@ import gsap, { Back, Power4 } from 'gsap';
 import  { useEffect,  useId } from 'react'
 import { BsArrow90DegRight } from 'react-icons/bs'
 import { Link } from 'react-scroll';
-
+import Swal from 'sweetalert2'
 
 function Home() {
   const id = useId();
@@ -12,14 +12,14 @@ function Home() {
   const text = 'nitinnautiyal-webdeveloper/designer'
   const roundText = text.split("")
   // const suii = useNavigation()
-  
+
   useEffect(() => {
+
     // const text = document.querySelector('.who');
     const tl = gsap.timeline()
     tl.set('#my-image', { opacity: 0, visibility: 'hidden' })
     tl.set('.name', { visibility: 'hidden', opacity: 0 })
     tl.from('.who', { opacity: 0, visibility: 'hidden' })
-    tl.from('#tree-image', { opacity: 0, visibility: 'hidden' })
     if (window.innerWidth > 768) {
       tl.fromTo(['.bg_text4', '.bg_text3', '.bg_text2', '.bg_text1'], { y: -1000, x: 0 }, { y: 0, x: 0, stagger: .2, ease: Power4.easeOut, duration: 1, })
       tl.fromTo(['.bg_text1', '.bg_text2', '.bg_text3', '.bg_text4'], { letterSpacing: 0 }, { letterSpacing: 10, stagger: .2, ease: Back.easeInOut, duration: .8, })
@@ -28,15 +28,9 @@ function Home() {
     tl.fromTo('.shade_text1', { x: 0, y: -100, opacity: 0 }, { x: 0, opacity: 1, y: 0, duration: 1, ease: Power4.easeOut }, '-=1.2')
     tl.fromTo('.h_name', { opacity: 0, scale: 1, x: 0, y: 100 }, { opacity: 1, stagger: .1, repeatRefresh: false, ease: 'back', duration: .3, x: 0, y: 0 }, '-=.6')
     tl.fromTo('.h_surname', { opacity: 0, scale: 1, x: 0, y: 100 }, { opacity: 1, stagger: .1, ease: 'back', duration: .3, x: 0, y: 0 }, '-=.2')
-    tl.to('#tree-image', { opacity: 1, ease: Power4.easeOut, zIndex: 10, visibility: 'visible' })
     tl.to('.who', { opacity: 1, ease: Power4.easeOut, duration: 1, visibility: 'visible' })
   }, [])
 
-  // useEffect(() =>{
-  //   window.addEventListener("resize", (e) => {
-  //     console.log(innerHeight, innerWidth)
-  //   })
-  // })
 
   const setImages = () => {
     const text = document.querySelector('.who');
@@ -50,18 +44,11 @@ function Home() {
     tl.fromTo('.h_name', { opacity: 1, scale: 1, x: 0, y: 0 }, { opacity: 0, stagger: .1, scale: 0, ease: 'back', duration: .2, x: 0, y: 0 }, '-=.3')
     tl.fromTo('.h_surname', { opacity: 1, scale: 1, x: 0, y: 0 }, { opacity: 0, stagger: .1, scale: 0, ease: 'back', duration: .2, x: 0, y: 0 }, '-=.3')
     tl.fromTo(['.bg_text5', '.bg_text4', '.bg_text3', '.bg_text2', '.bg_text1'], { x: 0 }, { stagger: .3, x: 2000 })
+    tl.to('.bg_text',{display: 'none'})
     tl.fromTo('#my-image', { opacity: 0, visibility: 'hidden' }, { opacity: 1, duration: 1, ease: Power4.easeOut, visibility: 'visible' })
     tl.fromTo('.suii', { opacity: 0, visibility: 'hidden' }, { opacity: 1, duration: 1, stagger: .2, ease: Power4.easeOut, visibility: 'visible' })
     tl.to('.name', { opacity: 1, scale: 1, visibility: 'visible', duration: 2, ease: Power4.easeOut, }, '-=7')
 
-    // let name = document.querySelector(`.img_div`)
-
-
-    // name.forEach((val, id) =>{
-    //   tl.fromTo(val, {opacity: 0, scale: 1, x: 0, y: 100, rotate: 0 }, { opacity:1,ease:'back', duration: .3, x: 1020, y:-120,height: '50%', width: 50 , transformOrigin: '0 100', rotateZ: (id*5)}, '-=.6')
-    // })
-
-    // myImage_ref.current.style.visibility = 'visible'
   }
 
   function animateSpring(name: string) {
@@ -137,7 +124,7 @@ function Home() {
         <div style={{ fontFamily: 'Coconat' }} className="font-semibold tracking-tight flex flex-col absolute left-[5.5%] w-4/5 h-[90%] top-[60%] text-[24px] translate-y-[-50%] xss:text-[25px] xs:h-auto xs:text-[25px] xs:top-[23%] sm:text-3xl sm:w-5/6 sm:top-[24%] md:text-4xl md:w-1/2 md:tracking-normal md:top-[30%] md+:w-[32%] md+:top-[45%] md+:tracking-widest lg:w-1/3 text-[#f5e4bc] name">
           Hey there, I am Nitin Nautiyal, Freelancer & Front-End Developer
           <p className='text-gray-500 text-base tracking-tighter xss:text-lg sm:text-xl mt-3 sm:mt-6  font-bold font-[Georgia, Times New Roman, Times, sans-serif] xss:tracking-wide '>I love creating beautiful user experiences.</p>
-          <Link to='contact' spy={true} smooth={true} offset={-100} duration={1000} className='text-base font-semibold text-[#f4805b] border-2 border-[#f4805b] rounded-full flex justify-center items-start overflow-hidden tracking-tight absolute hover:animate-pulse hover:scale-105 duration-300 ease-in w-max h-10 py-2 px-5 bottom-20 left-[50%] translate-x-[-50%] xs:left-0 xs:translate-x-0 xs:bottom-[-30%] sm:bottom-[-40%] md:bottom-[-20%] md:tracking-normal md:mt-10 xl:bottom-[-40%]   '>Get in touch
+          <Link to='contact' spy={true} smooth={true} offset={-100} duration={1000} className='text-base font-semibold text-[#f4805b] border-2 border-[#f4805b] rounded-full flex justify-center items-start overflow-hidden tracking-tight absolute hover:animate-pulse hover:scale-105 duration-300 ease-in w-max h-10 py-2 px-5 bottom-10  left-[50%] translate-x-[-50%] xs:left-0 xs:translate-x-0 xs:bottom-[-30%] sm:bottom-[-40%] md:bottom-[-20%] md:tracking-normal md:mt-10 xl:bottom-[-40%]   '>Get in touch
             <BsArrow90DegRight className='h-5 w-5  ml-3 mt-1  rotate-90 my-auto'></BsArrow90DegRight>
           </Link>
         </div>
